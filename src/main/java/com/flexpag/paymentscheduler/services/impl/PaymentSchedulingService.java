@@ -42,6 +42,10 @@ public class PaymentSchedulingService implements PaymentScheduleService {
             throw new Exception("Não há nenhum agendamento de pagamento com o id fornecido.");
         }
 
+        if(paymentSchedulingOptional.get().getStatus()){
+            throw new Exception("O agendamento não pôde ser deletado pois o pagamento já foi efetuado.");
+        }
+
         if(paymentSchedulingOptional.get().getSchedulingDateTime().isBefore(LocalDateTime.now())){
             throw new Exception("Pagamento já efetuado.");
         }
