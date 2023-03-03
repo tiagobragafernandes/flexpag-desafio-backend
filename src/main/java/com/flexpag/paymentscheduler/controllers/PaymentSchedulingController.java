@@ -19,7 +19,7 @@ public class PaymentSchedulingController {
     public PaymentScheduling addPaymentScheduling(@RequestBody PaymentRequest paymentRequest) {
 
         try{
-            return paymentScheduleService.save(paymentRequest);
+            return paymentScheduleService.createPaymentSchedule(paymentRequest);
         }catch (Exception exc){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, exc.getMessage(), exc);

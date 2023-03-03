@@ -20,14 +20,14 @@ public class PaymentSchedulingService implements PaymentScheduleService {
         this.paymentSchedulingRepository = paymentSchedulingRepository;
     }
 
-    public PaymentScheduling save(PaymentRequest paymentRequest) throws Exception {
+    public PaymentScheduling createPaymentSchedule(PaymentRequest paymentRequest) throws Exception {
 
         if(paymentRequest.getPaymentAmount() <= 0){
             throw new Exception("O valor do pagamento deve ser maior que zero.");
         }
 
         if(paymentRequest.getSchedulingDate().isBefore(LocalDateTime.now())){
-            throw new Exception("A data do pagamento deve ser maior que a data de hoje");
+            throw new Exception("A data do pagamento deve ser maior que a data de hoje.");
         }
 
         PaymentScheduling paymentScheduling = new PaymentScheduling(paymentRequest);
@@ -39,7 +39,7 @@ public class PaymentSchedulingService implements PaymentScheduleService {
         Optional<PaymentScheduling> paymentSchedulingOptional = paymentSchedulingRepository.findById(id);
 
         if (!paymentSchedulingOptional.isPresent()) {
-            throw new Exception("Não foi encontrado nenhum agendamento de pagamento com o id fornecido.");
+            throw new Exception("Não há nenhum agendamento de pagamento com o id fornecido.");
         }
 
         if(paymentSchedulingOptional.get().getSchedulingDateTime().isBefore(LocalDateTime.now())){

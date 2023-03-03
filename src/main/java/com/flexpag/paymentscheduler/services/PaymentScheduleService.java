@@ -4,8 +4,8 @@ import com.flexpag.paymentscheduler.controllers.requests.PaymentRequest;
 import com.flexpag.paymentscheduler.models.PaymentScheduling;
 
 public interface PaymentScheduleService {
-   PaymentScheduling save(PaymentRequest paymentRequest) throws Exception;
+   PaymentScheduling createPaymentSchedule(PaymentRequest paymentRequest) throws Exception;
 
-    void deleteSchedule(Long id) throws Exception;
+   void deleteSchedule(Long id) throws Exception;
 
 }
