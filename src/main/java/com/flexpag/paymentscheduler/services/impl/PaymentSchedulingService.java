@@ -1,6 +1,7 @@
 package com.flexpag.paymentscheduler.services.impl;
 
-import com.flexpag.paymentscheduler.controllers.requests.PaymentRequest;
+import com.flexpag.paymentscheduler.controllers.requests.CreateSchedulingRequest;
+import com.flexpag.paymentscheduler.controllers.requests.EditSchedulingRequest;
 import com.flexpag.paymentscheduler.models.PaymentScheduling;
 import com.flexpag.paymentscheduler.repositories.PaymentSchedulingRepository;
 import com.flexpag.paymentscheduler.services.PaymentScheduleService;
@@ -20,17 +21,17 @@ public class PaymentSchedulingService implements PaymentScheduleService {
         this.paymentSchedulingRepository = paymentSchedulingRepository;
     }
 
-    public PaymentScheduling createPaymentSchedule(PaymentRequest paymentRequest) throws Exception {
+    public PaymentScheduling createPaymentSchedule(CreateSchedulingRequest createSchedulingRequest) throws Exception {
 
-        if(paymentRequest.getPaymentAmount() <= 0){
+        if(createSchedulingRequest.getPaymentAmount() <= 0){
             throw new Exception("O valor do pagamento deve ser maior que zero.");
         }
 
-        if(paymentRequest.getSchedulingDate().isBefore(LocalDateTime.now())){
+        if(createSchedulingRequest.getSchedulingDate().isBefore(LocalDateTime.now())){
             throw new Exception("A data do pagamento deve ser maior que a data de hoje.");
         }
 
-        PaymentScheduling paymentScheduling = new PaymentScheduling(paymentRequest);
+        PaymentScheduling paymentScheduling = new PaymentScheduling(createSchedulingRequest);
         return paymentSchedulingRepository.save(paymentScheduling);
     }
 
@@ -51,6 +52,32 @@ public class PaymentSchedulingService implements PaymentScheduleService {
         }
 
         paymentSchedulingRepository.deleteById(id);
+    }
+
+    public PaymentScheduling editPaymentSchedule(EditSchedulingRequest editSchedulingRequest) throws Exception {
+
+        Optional<PaymentScheduling> paymentSchedulingOptional = paymentSchedulingRepository.findById(editSchedulingRequest.getId());
+
+        if(!paymentSchedulingOptional.isPresent()){
+            throw new Exception("Não há nenhum agendamento de pagamento com o id fornecido.");
+        }
+
+        if(paymentSchedulingOptional.get().getStatus()){
+            throw new Exception("O pagamento não pode ser editado pois o mesmo já foi pago.");
+        }
+
+        LocalDateTime newLocalDateTime = editSchedulingRequest.getSchedulingDate();
+
+        if(newLocalDateTime.isBefore(LocalDateTime.now())){
+            throw new Exception("A data e/ou hora do reagendamento deve ser superior que a atual.");
+        }
+
+        PaymentScheduling paymentScheduling = paymentSchedulingOptional.get();
+
+        paymentScheduling.setSchedulingDateTime(editSchedulingRequest.getSchedulingDate());
+
+        return paymentSchedulingRepository.save(paymentScheduling);
+
     }
 
 

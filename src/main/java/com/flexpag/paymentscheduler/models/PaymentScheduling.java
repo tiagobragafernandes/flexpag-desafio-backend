@@ -1,15 +1,19 @@
 package com.flexpag.paymentscheduler.models;
 
-import com.flexpag.paymentscheduler.controllers.requests.PaymentRequest;
+import com.flexpag.paymentscheduler.controllers.requests.CreateSchedulingRequest;
 import com.flexpag.paymentscheduler.models.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "payment_scheduling")
 public class PaymentScheduling implements Serializable {
@@ -29,12 +33,10 @@ public class PaymentScheduling implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss") //timestamp
     private LocalDateTime schedulingDateTime;
 
-    public PaymentScheduling(PaymentRequest paymentRequest) {
+    public PaymentScheduling(CreateSchedulingRequest createSchedulingRequest) {
         this.status = PaymentStatus.PENDING.getEnumCode();
-        this.amount = paymentRequest.getPaymentAmount();
-        this.schedulingDateTime = paymentRequest.getSchedulingDate();
+        this.amount = createSchedulingRequest.getPaymentAmount();
+        this.schedulingDateTime = createSchedulingRequest.getSchedulingDate();
     }
-
-    public PaymentScheduling() {}
 
 }

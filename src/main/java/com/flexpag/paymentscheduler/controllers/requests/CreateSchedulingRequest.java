@@ -4,7 +4,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class PaymentRequest {
+public class CreateSchedulingRequest {
     private LocalDateTime schedulingDate;
     private Double paymentAmount;
 

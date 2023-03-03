@@ -1,6 +1,7 @@
 package com.flexpag.paymentscheduler.controllers;
 
-import com.flexpag.paymentscheduler.controllers.requests.PaymentRequest;
+import com.flexpag.paymentscheduler.controllers.requests.CreateSchedulingRequest;
+import com.flexpag.paymentscheduler.controllers.requests.EditSchedulingRequest;
 import com.flexpag.paymentscheduler.models.PaymentScheduling;
 import com.flexpag.paymentscheduler.services.PaymentScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,29 @@ public class PaymentSchedulingController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PaymentScheduling addPaymentScheduling(@RequestBody PaymentRequest paymentRequest) {
+    public PaymentScheduling addPaymentScheduling(@RequestBody CreateSchedulingRequest createSchedulingRequest) {
 
         try{
-            return paymentScheduleService.createPaymentSchedule(paymentRequest);
+            return paymentScheduleService.createPaymentSchedule(createSchedulingRequest);
         }catch (Exception exc){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, exc.getMessage(), exc);
         }
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public PaymentScheduling editPaymentScheduling(@RequestBody EditSchedulingRequest editSchedulingRequest){
+        try{
+            return paymentScheduleService.editPaymentSchedule(editSchedulingRequest);
+        }catch (Exception exc){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, exc.getMessage(), exc);
+        }
+    }
+
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public PaymentScheduling deleteSchedule(@PathVariable Long id){
         try {
             paymentScheduleService.deleteSchedule(id);
