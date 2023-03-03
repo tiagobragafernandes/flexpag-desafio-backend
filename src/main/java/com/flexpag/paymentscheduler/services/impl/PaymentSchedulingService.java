@@ -3,6 +3,7 @@ package com.flexpag.paymentscheduler.services.impl;
 import com.flexpag.paymentscheduler.controllers.requests.CreateSchedulingRequest;
 import com.flexpag.paymentscheduler.controllers.requests.EditSchedulingRequest;
 import com.flexpag.paymentscheduler.models.PaymentScheduling;
+import com.flexpag.paymentscheduler.models.enums.PaymentStatus;
 import com.flexpag.paymentscheduler.repositories.PaymentSchedulingRepository;
 import com.flexpag.paymentscheduler.services.PaymentScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,16 @@ public class PaymentSchedulingService implements PaymentScheduleService {
 
     public PaymentScheduling createPaymentSchedule(CreateSchedulingRequest createSchedulingRequest) throws Exception {
 
+        if(createSchedulingRequest.getPaymentAmount() == null){
+            throw new Exception("Você deve inserir um valor para agendar um pagamento.");
+        }
+
         if(createSchedulingRequest.getPaymentAmount() <= 0){
             throw new Exception("O valor do pagamento deve ser maior que zero.");
+        }
+
+        if(createSchedulingRequest.getSchedulingDate() == null){
+            throw new Exception("Você deve inserir uma data e hora para agendar um pagamento. (aaaa-mm-ddThh:mm:ss)");
         }
 
         if(createSchedulingRequest.getSchedulingDate().isBefore(LocalDateTime.now())){
@@ -55,7 +64,7 @@ public class PaymentSchedulingService implements PaymentScheduleService {
             throw new Exception("Não há nenhum agendamento de pagamento com o id fornecido.");
         }
 
-        if(paymentSchedulingOptional.get().getStatus()){
+        if(paymentSchedulingOptional.get().getStatus() == PaymentStatus.PAID){
             throw new Exception("O agendamento não pôde ser deletado pois o pagamento já foi efetuado.");
         }
 
@@ -74,7 +83,7 @@ public class PaymentSchedulingService implements PaymentScheduleService {
             throw new Exception("Não há nenhum agendamento de pagamento com o id fornecido.");
         }
 
-        if(paymentSchedulingOptional.get().getStatus()){
+        if(paymentSchedulingOptional.get().getStatus() == PaymentStatus.PAID){
             throw new Exception("O pagamento não pode ser editado pois o mesmo já foi pago.");
         }
 

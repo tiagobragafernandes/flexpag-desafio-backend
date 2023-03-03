@@ -1,5 +1,9 @@
 package com.flexpag.paymentscheduler.models.enums;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 public enum PaymentStatus {
 
     PENDING(false),
