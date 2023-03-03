@@ -16,3 +16,7 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+# Removendo o trace da Exception
+server:
+  error:
+    include-stacktrace: never

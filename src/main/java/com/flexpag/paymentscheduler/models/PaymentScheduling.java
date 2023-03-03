@@ -1,6 +1,7 @@
-package com.flexpag.paymentscheduler.model;
+package com.flexpag.paymentscheduler.models;
 
-import com.flexpag.paymentscheduler.model.enums.PaymentStatus;
+import com.flexpag.paymentscheduler.controllers.requests.PaymentRequest;
+import com.flexpag.paymentscheduler.models.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -28,10 +29,12 @@ public class PaymentScheduling implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss") //timestamp
     private LocalDateTime schedulingDateTime;
 
-    public PaymentScheduling(LocalDateTime schedulingDateTime, Double amount) {
+    public PaymentScheduling(PaymentRequest paymentRequest) {
         this.status = PaymentStatus.PENDING.getEnumCode();
-        this.amount = amount;
-        this.schedulingDateTime = schedulingDateTime;
+        this.amount = paymentRequest.getPaymentAmount();
+        this.schedulingDateTime = paymentRequest.getSchedulingDate();
     }
+
+    public PaymentScheduling() {}
 
 }

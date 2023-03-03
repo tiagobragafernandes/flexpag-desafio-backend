@@ -1,4 +1,4 @@
-package com.flexpag.paymentscheduler.model.enums;
+package com.flexpag.paymentscheduler.models.enums;
 
 public enum PaymentStatus {
 
