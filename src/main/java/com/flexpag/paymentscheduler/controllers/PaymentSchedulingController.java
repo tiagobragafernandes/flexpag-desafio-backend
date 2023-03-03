@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/payment-scheduling")
 public class PaymentSchedulingController {
     @Autowired
     private PaymentScheduleService paymentScheduleService;
@@ -27,11 +27,11 @@ public class PaymentSchedulingController {
         }
     }
 
-    @PutMapping
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PaymentScheduling editPaymentScheduling(@RequestBody EditSchedulingRequest editSchedulingRequest){
-        try{
-            return paymentScheduleService.editPaymentSchedule(editSchedulingRequest);
+    public PaymentScheduling paymentSchedulingDetails(@PathVariable Long id){
+        try {
+            return paymentScheduleService.paymentSchedulingDetails(id);
         }catch (Exception exc){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, exc.getMessage(), exc);
@@ -48,6 +48,17 @@ public class PaymentSchedulingController {
                 HttpStatus.BAD_REQUEST, exc.getMessage(), exc);
         }
         return null;
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public PaymentScheduling editPaymentScheduling(@RequestBody EditSchedulingRequest editSchedulingRequest){
+        try{
+            return paymentScheduleService.editPaymentSchedule(editSchedulingRequest);
+        }catch (Exception exc){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, exc.getMessage(), exc);
+        }
     }
 
 }

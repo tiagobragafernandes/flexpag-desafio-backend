@@ -35,6 +35,18 @@ public class PaymentSchedulingService implements PaymentScheduleService {
         return paymentSchedulingRepository.save(paymentScheduling);
     }
 
+    public PaymentScheduling paymentSchedulingDetails(Long id) throws Exception {
+
+        Optional<PaymentScheduling> paymentSchedulingOptional = paymentSchedulingRepository.findById(id);
+
+        if (!paymentSchedulingOptional.isPresent()) {
+            throw new Exception("Não há nenhum agendamento de pagamento com o id fornecido.");
+        }
+
+        return paymentSchedulingOptional.get();
+
+    }
+
     public void deleteSchedule(Long id) throws Exception {
 
         Optional<PaymentScheduling> paymentSchedulingOptional = paymentSchedulingRepository.findById(id);
