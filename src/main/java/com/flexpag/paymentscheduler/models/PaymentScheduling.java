@@ -26,7 +26,7 @@ public class PaymentScheduling implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 7)
     @Enumerated(EnumType.STRING)
     private PaymentStatus status; //alterar o tipo do ENUM
     @Column(nullable = false)
