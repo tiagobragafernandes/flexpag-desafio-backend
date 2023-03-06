@@ -4,6 +4,9 @@ import com.flexpag.paymentscheduler.controllers.requests.CreateSchedulingRequest
 import com.flexpag.paymentscheduler.controllers.requests.EditSchedulingRequest;
 import com.flexpag.paymentscheduler.models.PaymentScheduling;
 import com.flexpag.paymentscheduler.services.PaymentSchedulingService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,24 +14,17 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/payment-scheduling") //Rota principal da API
+@Api(value = "Api de detalhes de agendamento")
 public class PaymentSchedulingController {
     @Autowired
     private PaymentSchedulingService paymentSchedulingService;
 
-    /* Cria um novo agendamento de pagamento
-    * O formato da requisição deve ser da seguinte maneira:
-    *   {
-    *   "paymentAmount": 275.0,
-	*   "schedulingDate": "2023-03-15T03:00:00"
-    *   }
-    * Ao enviar o status http esperado é o 201 e você deverá ter como retorno os dados
-    * referentes a esse agendamento.
-    *
-    * localhost:8080/payment-scheduling (POST)
-    */
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Permite criar um novo agendamento de pagamento."),
+            @ApiResponse(code = 400, message = "Valida se os campos quantia e data possuem os valores esperados.")
+    })
     public PaymentScheduling createPaymentScheduling(@RequestBody CreateSchedulingRequest createSchedulingRequest) {
 
         try {
@@ -39,10 +35,12 @@ public class PaymentSchedulingController {
         }
     }
 
-    //Permite verificar o status do pagamento, você deve enviar via queryParam o id válido;
-    //localhost:8080/payment-scheduling/id (GET)
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Permite verificar o status do pagamento, você deve enviar via queryParam o id válido."),
+        @ApiResponse(code = 400, message = "Valida se os campos quantia e schedulingDateTime possuem os valores esperados.")
+    })
     public PaymentScheduling getPaymentSchedulingDetails(@PathVariable Long id) {
         try {
             return paymentSchedulingService.getPaymentSchedulingDetails(id);
@@ -52,10 +50,12 @@ public class PaymentSchedulingController {
         }
     }
 
-    //Permite excluir um agendamento de pagamento que não foi pago. Para isso você deve informar um id válido;
-    //localhost:8080/payment-scheduling/id (PUT)
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "Permite excluir um agendamento de pagamento que não foi pago"),
+            @ApiResponse(code = 400, message = "Valida se o campo id coincide com algum registro do BD.")
+    })
     public PaymentScheduling deleteScheduling(@PathVariable Long id) {
         try {
             paymentSchedulingService.deleteScheduling(id);
@@ -66,10 +66,12 @@ public class PaymentSchedulingController {
         return null;
     }
 
-    //Permite editar a data de agendamento de um pagamento, para isso você deve informar um id válido;
-    //localhost:8080/payment-scheduling/id (PUT)
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Permite editar a data de agendamento de um pagamento, para isso você deve informar um id válido"),
+            @ApiResponse(code = 400, message = "Valida se o campo id coincide com algum registro do BD e schedulingDateTime possui o valor permitido.")
+    })
     public PaymentScheduling editPaymentScheduling(@RequestBody EditSchedulingRequest editSchedulingRequest) {
         try {
             return paymentSchedulingService.editPaymentScheduling(editSchedulingRequest);
