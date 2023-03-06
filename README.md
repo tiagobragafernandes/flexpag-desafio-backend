@@ -88,8 +88,13 @@ spring:
 
 ### Swagger
 
+A documentação do projeto com todos os métodos da API encontra-se na seguinte rota:
+
 http://localhost:8080/swagger-ui.html
 
+### Collection
+
+Um arquivo contendo uma collection do Postman para realização do teste da API está disponibilizada na pasta raíz do projeto, com esse arquivo é possível realizar o teste do CRUD.
 
 ### :notebook: To-do list
 - [x] Fazer o fork do projeto
