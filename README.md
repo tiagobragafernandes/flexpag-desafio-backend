@@ -82,6 +82,21 @@ spring:
         show_sql: true
 ```
 
+### :notebook: To-do list
+- [x] Fazer o fork do projeto
+- [x] Implementar solução
+- [x] Enviar link do projeto
+
+:information_source: _Sinta-se livre para incluir quaisquer observações que achar necessário_
+
+---
+
+_O desafio acima foi cuidadosamente construído para propósitos de avaliação apenas._
+
+---
+
+# Implementações Adicionais
+
 ### MER
 
 <img src="https://github.com/tiagobragafernandes/flexpag-desafio-backend/blob/main/contents/MER-payment-scheduler.png?raw=true" alt="Modelo de entidade e relacionamento da aplicação">
@@ -95,14 +110,3 @@ http://localhost:8080/swagger-ui.html
 ### Collection
 
 Um arquivo contendo uma collection do Postman para realização do teste da API está disponibilizada na pasta raíz do projeto, com esse arquivo é possível realizar o teste do CRUD.
-
-### :notebook: To-do list
-- [x] Fazer o fork do projeto
-- [x] Implementar solução
-- [x] Enviar link do projeto
-
-:information_source: _Sinta-se livre para incluir quaisquer observações que achar necessário_
-
----
-
-_O desafio acima foi cuidadosamente construído para propósitos de avaliação apenas._
