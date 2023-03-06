@@ -14,10 +14,13 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 @Component
 public class PaymentSchedulingLoader implements CommandLineRunner {
+
     @PersistenceContext
     private EntityManager entityManager;
+
     @Autowired
     private PaymentSchedulingRepository paymentSchedulingRepository;
+
     @Override
     @Transactional
     public void run(String... args) throws Exception {

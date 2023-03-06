@@ -21,7 +21,6 @@ public class SpringFoxConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.flexpag.paymentscheduler"))
                 .build()
                 .apiInfo(apiInfo());
-
     }
 
     private ApiInfo apiInfo() {

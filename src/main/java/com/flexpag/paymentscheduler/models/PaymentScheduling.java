@@ -12,11 +12,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "payment_scheduling")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class PaymentScheduling implements Serializable {
 
     //Permitindo a serialização da classe
@@ -28,7 +28,7 @@ public class PaymentScheduling implements Serializable {
     private Long id;
     @Column(nullable = false, length = 7)
     @Enumerated(EnumType.STRING)
-    private PaymentStatus status; //alterar o tipo do ENUM
+    private PaymentStatus status;
     @Column(nullable = false)
     private Double amount;
     @Column(nullable = false)
