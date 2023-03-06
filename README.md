@@ -82,6 +82,11 @@ spring:
         show_sql: true
 ```
 
+### MER
+
+<img src="https://github.com/tiagobragafernandes/flexpag-desafio-backend/blob/main/contents/MER-payment-scheduler.png?raw=true" alt="Modelo de entidade e relacionamento da aplicação">
+
+
 ### :notebook: To-do list
 - [x] Fazer o fork do projeto
 - [x] Implementar solução
