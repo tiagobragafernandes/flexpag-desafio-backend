@@ -1,21 +1,21 @@
-package com.flexpag.paymentscheduler.model.enums;
+package com.flexpag.paymentscheduler.models.enums;
 
 public enum PaymentStatus {
 
-    PENDING(false),
-    PAID(true);
+    PENDING(1),
+    PAID(2);
 
-    private final boolean enumCode;
+    private final Integer enumCode;
 
-    private PaymentStatus(boolean enumCode) {
+    private PaymentStatus(Integer enumCode) {
         this.enumCode = enumCode;
     }
 
-    public boolean getEnumCode() {
+    public Integer getEnumCode() {
         return enumCode;
     }
 
-    public static PaymentStatus valueOf(boolean enumCode) {
+    public static PaymentStatus valueOf(Integer enumCode) {
         for (PaymentStatus value : PaymentStatus.values()) {
             if (value.getEnumCode() == enumCode) {
                 return value;
