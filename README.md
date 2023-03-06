@@ -86,6 +86,10 @@ spring:
 
 <img src="https://github.com/tiagobragafernandes/flexpag-desafio-backend/blob/main/contents/MER-payment-scheduler.png?raw=true" alt="Modelo de entidade e relacionamento da aplicação">
 
+### Swagger
+
+http://localhost:8080/swagger-ui.html
+
 
 ### :notebook: To-do list
 - [x] Fazer o fork do projeto
