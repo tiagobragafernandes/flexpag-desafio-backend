@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"paymentAmount\": 275.0,\r\n\t\"schedulingDate\": \"2023-03-15T03:00:00\"\r\n}",
+					"raw": "{\r\n\t\"paymentAmount\": 275.0,\r\n\t\"schedulingDate\": \"2023-03-15 03:00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -46,7 +46,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"paymentAmount\": 275.0,\r\n\t\"schedulingDate\": \"2023-03-15T03:00:00\"\r\n}",
+							"raw": "{\r\n\t\"paymentAmount\": 275.0,\r\n\t\"schedulingDate\": \"2023-03-15 03:00:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,7 +78,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/payment-scheduling/3",
+					"raw": "http://localhost:8080/payment-scheduling/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -86,7 +86,7 @@
 					"port": "8080",
 					"path": [
 						"payment-scheduling",
-						"3"
+						"2"
 					]
 				}
 			},
@@ -167,7 +167,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"id\": 4,\r\n    \"schedulingDate\": \"2023-05-02T00:00:00\"\r\n}",
+					"raw": "{\r\n\t\"id\": 4,\r\n    \"schedulingDate\": \"2023-03-02 00:00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -202,7 +202,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"id\": 2,\r\n    \"schedulingDate\": \"2023-05-02T00:00:00\"\r\n}",
+							"raw": "{\r\n\t\"id\": 2,\r\n    \"schedulingDate\": \"2023-05-02 00:00:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

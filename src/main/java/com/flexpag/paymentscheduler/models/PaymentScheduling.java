@@ -32,7 +32,7 @@ public class PaymentScheduling implements Serializable {
     @Column(nullable = false)
     private Double amount;
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss") //timestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo") //timestamp
     private LocalDateTime schedulingDateTime;
 
     public PaymentScheduling(@NotNull CreateSchedulingRequest createSchedulingRequest) {
