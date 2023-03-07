@@ -22,6 +22,7 @@ Bom desafio!
 - [✔️ Critérios de Avaliação](#️-critérios-de-avaliação)
 - [:rocket: Instruções](#rocket-instruções)
   - [:notebook: To-do list](#notebook-to-do-list)
+- [:book: Implementações Adicionais](#implementações-adicionais)
 
 # 🧠 Contexto
 
